@@ -1,0 +1,26 @@
+name: test_gisa
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if publishing to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.0.0 # HTTP 요청용 패키지 추가
+  intl: ^0.18.0 # 또는 최신 버전
+  fl_chart: ^0.69.0   
+  workmanager: ^0.5.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/background.png # 이미지 파일 경로 추가
+
