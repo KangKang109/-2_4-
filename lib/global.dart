@@ -17,4 +17,6 @@ class Global {
 
   // 게임 이용권 개수 (초기값 0)
   static int gameTickets = 0;
+
+  static int Tickets = 1;
 }

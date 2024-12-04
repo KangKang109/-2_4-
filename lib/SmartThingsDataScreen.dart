@@ -13,7 +13,7 @@ class SmartThingsDataScreen extends StatefulWidget {
 }
 //API 연결//
 class _SmartThingsDataScreenState extends State<SmartThingsDataScreen> {
-  final String apiKey = '30dd6a5d-deea-45db-b3f0-d071b145e539'; // API 키
+  final String apiKey = 'ef10d96c-7da5-45a7-91f9-46db54b66216'; // API 키
   List<Map<String, dynamic>> _devices = [];
   double _totalPower = 0.0;
   List<double> _powerHistory = [];
