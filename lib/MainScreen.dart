@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'RewardScreen.dart'; 
+import 'Co2Analysis.dart'; 
 import 'SmartThingsDataScreen.dart'; // 새 화면 위젯을 임포트합니다.
 import 'global.dart' as global;
 
@@ -32,10 +32,10 @@ class MainScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const RewardScreen()),
+                  MaterialPageRoute(builder: (context) => const Co2Analysis()),
                 );
               },
-              child: const Text('리워드 화면으로 이동'),
+              child: const Text('내가 아낀 탄소 배출량 보기'),
             ),
           ],
         ),
