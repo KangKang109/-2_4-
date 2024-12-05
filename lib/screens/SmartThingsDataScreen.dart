@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:fl_chart/fl_chart.dart';
-import 'DataAnalysis.dart';
-import 'global.dart' as global;
+import '../DataAnalysis.dart';
+import '../global.dart' as global;
+import 'package:get/get.dart';
+import '../routes/appRoutes.dart';
+
+
 class SmartThingsDataScreen extends StatefulWidget {
   const SmartThingsDataScreen({super.key});
 
@@ -13,7 +17,7 @@ class SmartThingsDataScreen extends StatefulWidget {
 }
 //API 연결//
 class _SmartThingsDataScreenState extends State<SmartThingsDataScreen> {
-  final String apiKey = 'ef10d96c-7da5-45a7-91f9-46db54b66216'; // API 키
+  final String apiKey = ''; // API 키
   List<Map<String, dynamic>> _devices = [];
   double _totalPower = 0.0;
   List<double> _powerHistory = [];
@@ -88,26 +92,25 @@ class _SmartThingsDataScreenState extends State<SmartThingsDataScreen> {
       print('Error fetching devices: $e');
     }
   }
- // 현재 인덱스를 관리하는 변수
+
+int currentIndex = 0; // 현재 인덱스를 관리하는 변수
 /* 
 자정이 되었을 때 값 초기화
 */
 void resetTotalPower() {
-    print("인덱스 0 : ${ global.Global.totalCO2[0].value}");
-    print("인덱스 1 : ${ global.Global.totalCO2[1].value}");
-    print("인덱스 2 : ${ global.Global.totalCO2[2].value}");
-    print("인덱스 3 : ${ global.Global.totalCO2[3].value}");
-    print("인덱스 4 : ${ global.Global.totalCO2[4].value}");
+    print(global.Global.totalCO2[0].value);
+      print(global.Global.totalCO2[1].value);
+      print(global.Global.totalCO2[2].value); 
   setState(() {
     // 유효한 인덱스 범위를 초과하지 않도록 설정
-    if (global.Global.currentIndex >= 0 && global.Global.currentIndex < global.Global.totalCO2.length) {
+    if (currentIndex >= 0 && currentIndex < global.Global.totalCO2.length) {
       if (_powerHistory.isEmpty ||
           _powerHistory.last != _totalPower * co2EmissionFactor) {
         _powerHistory.add(_totalPower * co2EmissionFactor);
         // 글로벌 배열의 현재 인덱스에 값 저장
-        global.Global.totalCO2[global.Global.currentIndex].value = _totalPower * co2EmissionFactor;
-        _powerHistory.add(global.Global.totalCO2[global.Global.currentIndex].value);
-        global.Global.currentIndex++; // 인덱스 증가
+        global.Global.totalCO2[currentIndex].value = _totalPower * co2EmissionFactor;
+        _powerHistory.add(global.Global.totalCO2[currentIndex].value);
+        currentIndex++; // 인덱스 증가
       }
      
     }
@@ -116,8 +119,8 @@ void resetTotalPower() {
     _totalPower = 0.0;
 
     // 인덱스를 초과하면 다시 처음으로 순환 (선택 사항)
-    if (global.Global.currentIndex >= global.Global.totalCO2.length) {
-      global.Global.currentIndex = 0; // 또는 원하는 로직으로 처리
+    if (currentIndex >= global.Global.totalCO2.length) {
+      currentIndex = 0; // 또는 원하는 로직으로 처리
     }
   });
  
@@ -247,7 +250,7 @@ void DataAnalysis() {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => DataAnalysisPage(index: global.Global.currentIndex),
+      builder: (context) => DataAnalysisPage(index: currentIndex),
     ),
   );
 }
